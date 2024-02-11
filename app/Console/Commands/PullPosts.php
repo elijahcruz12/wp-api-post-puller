@@ -70,6 +70,9 @@ class PullPosts extends Command
             // If excerpt contains '<span class="excerpt-hellip"> \[…\]</span>', replace it with '...'
             $excerpt = preg_replace('/<span class="excerpt-hellip"> \[…\]<\/span>/', '...', $excerpt);
 
+            // If the content contains <figure> with or without a class, remove it, but keep the content inside
+            $content = preg_replace('/<figure.*?>(.*?)<\/figure>/s', '$1', $content);
+
             $converter = new HtmlConverter();
 
             $postModel->content = $converter->convert($content);
