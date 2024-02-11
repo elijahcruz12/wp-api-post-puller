@@ -67,6 +67,9 @@ class PullPosts extends Command
             $content = $post['content']['rendered'];
             $excerpt = $post['excerpt']['rendered'];
 
+            // If excerpt contains '<span class="excerpt-hellip"> \[…\]</span>', replace it with '...'
+            $excerpt = preg_replace('/<span class="excerpt-hellip"> \[…\]<\/span>/', '...', $excerpt);
+
             $converter = new HtmlConverter();
 
             $postModel->content = $converter->convert($content);
