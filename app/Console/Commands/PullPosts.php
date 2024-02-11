@@ -83,6 +83,9 @@ class PullPosts extends Command
 
             $postModel->photo_url = $post['_embedded']['wp:featuredmedia'][0]['source_url'] ?? null;
 
+            // Replace <cite> with italics
+            $postModel->content = preg_replace('/<cite>(.*?)<\/cite>/', '*$1*', $postModel->content);
+
             if($postModel->isDirty()){
                 $postModel->save();
                 $this->info('Saved post ' . $postModel->id . ' - ' . $postModel->title . '.');
