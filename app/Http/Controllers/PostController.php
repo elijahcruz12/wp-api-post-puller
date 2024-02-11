@@ -28,7 +28,7 @@ class PostController extends Controller
         if ($do_not_paginate) {
             $posts = Post::all();
         } else {
-            $posts = Post::paginate($per_page, ['*'], 'page', $page);
+            $posts = Post::orderByDesc('created_at')->paginate($per_page, ['*'], 'page', $page);
         }
 
         if($posts->count() === 0) {
