@@ -79,7 +79,7 @@ class PullPosts extends Command
             $postModel->excerpt = $converter->convert($excerpt);
 
             // For each ![]() which has a url in it, add a newline before and after it
-            $postModel->content = preg_replace('/!\[.*?\]\((.*?)\)/', "\n\n![$1]\n\n", $postModel->content);
+            $postModel->content = preg_replace('/!\[.*?\]\((.*?)\)/', "\n\n![]($1)\n\n", $postModel->content);
 
             $postModel->photo_url = $post['_embedded']['wp:featuredmedia'][0]['source_url'] ?? null;
 
